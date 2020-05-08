@@ -16,6 +16,7 @@ from pyrep.errors import ConfigurationPathError
 import numpy as np
 import math
 
+
 LOOPS = 10
 SCENE_FILE = join(dirname(abspath(__file__)), 'colab.ttt')
 pr = PyRep()
@@ -72,6 +73,8 @@ for i in range(LOOPS):
         if not done1:
             done1 = path1.step()
         pr.step()
+
+    
 
     path1.clear_visualization()
     print('Reached target %d!' % i)
