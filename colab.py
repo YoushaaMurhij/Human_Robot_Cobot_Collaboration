@@ -1,8 +1,10 @@
 """
-A Franka Panda reaches for 10 randomly places targets.
+A Franka Panda reaches for 10 randomly places targets while Youbot reaches for 10 randomly poses
 This script contains examples of:
     - Linear (IK) paths.
     - Scene manipulation (creating an object and moving it).
+    - Linear mobile paths with an omnidirectional robot to reach a target.
+    - A human to walk in between so they can interact with him.
 """
 from os.path import dirname, join, abspath
 from pyrep import PyRep
