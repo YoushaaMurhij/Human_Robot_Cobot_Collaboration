@@ -15,6 +15,7 @@ from pyrep.const import PrimitiveShape
 from pyrep.errors import ConfigurationPathError
 import numpy as np
 import math
+from pyrep.robots.end_effectors.panda_gripper import PandaGripper
 
 
 LOOPS = 10
@@ -22,8 +23,9 @@ SCENE_FILE = join(dirname(abspath(__file__)), 'colab.ttt')
 pr = PyRep()
 pr.launch(SCENE_FILE, headless=False)
 pr.start()
-agent = Panda()
-agent1 = YouBot()
+arm = Panda()
+mobile = YouBot()
+#gripper = PandaGripper()
 
 # We could have made this target in the scene, but lets create one dynamically
 target = Shape.create(type=PrimitiveShape.SPHERE,
@@ -39,8 +41,8 @@ position_min, position_max = [0.8, 1.8, 0.0], [1.0, 2.2, 0.4]
 position_min1, position_max1 = [-0.5, 1.4, 0.1], [1.0, 0.5, 0.1]
 
 
-starting_joint_positions = agent.get_joint_positions()
-starting_pose = agent1.get_2d_pose()
+starting_joint_positions = arm.get_joint_positions()
+starting_pose = mobile.get_2d_pose()
 
 for i in range(LOOPS):
 
@@ -57,21 +59,24 @@ for i in range(LOOPS):
 
     # Get a path to the target (rotate so z points down)
     try:
-        path = agent.get_path(position=pos, euler=[0, math.radians(180), 0])
-        path1 = agent1.get_linear_path(position=pos1, angle=0)
+        path = arm.get_path(position=pos, euler=[0, math.radians(180), 0])
+        path1 = mobile.get_linear_path(position=pos1, angle=0)
         path1.visualize()
     except ConfigurationPathError as e:
         print('Could not find path')
         continue
 
     # Step the simulation and advance the agent along the path
-    done = False
+    done  = False
     done1 = False
-    while (not done) & (not done1):
+    done2 = False
+    while not done1:
         if not done:
             done = path.step()
         if not done1:
             done1 = path1.step()
+        ##if not done2:
+            ##done2 = gripper.actuate(0.5, velocity=0.04)
         pr.step()
 
     
