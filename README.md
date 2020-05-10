@@ -8,7 +8,7 @@ Simulation in CoppeliaSim (V-rep)
 Add the following to your *~/.bashrc* file: (__NOTE__: the 'EDIT ME' in the first line)
 
 ```bash
-export COPPELIASIM_ROOT=/'EDIT ME/CoppeliaSim_Edu_V4_0_0_Ubuntu18_04
+export COPPELIASIM_ROOT=/EDIT ME/CoppeliaSim_Edu_V4_0_0_Ubuntu18_04
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$COPPELIASIM_ROOT
 export QT_QPA_PLATFORM_PLUGIN_PATH=$COPPELIASIM_ROOT
 ```
